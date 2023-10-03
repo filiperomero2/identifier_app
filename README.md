@@ -1,6 +1,6 @@
 # Identifier
 
-This is a generic snakemake workflow for integrated similarity search and phylogenetic inference. From a set of query sequences, it runs blastn against custom databases to get the closest reference sequences. Subsets of the closest hits for each query are then retrieved and aligned for a phylogenetic reconstructions.
+This is a generic snakemake workflow for integrated similarity search and phylogenetic inference. From a set of query sequences, it runs blastn against custom databases to get the closest reference sequences. Subsets of the closest hits for each query are then retrieved and aligned for phylogenetic reconstructions.
 
 ## Instalation
 
