@@ -1,0 +1,10 @@
+name: identifier
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - snakemake=7.32.4
+  - blast=2.14.1
+  - mafft=7.520
+  - iqtree=2.2.5
+  - pandas=2.1.1
