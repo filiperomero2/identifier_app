@@ -1,0 +1,3 @@
+This directory holds the reference sequences used to create blastn databases. The development fase used the mitochondrial refseq. To download it (and use with the example data): 
+
+$ wget https://ftp.ncbi.nlm.nih.gov/refseq/release/mitochondrion/mitochondrion.1.1.genomic.fna.gz
