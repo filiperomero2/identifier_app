@@ -12,7 +12,7 @@ To make the pipeline available, clone the github repo, and create a conda enviro
 
 ## Usage
 
-To run the pipeline, simply activate the environment and run the identifier.py script. It requires multiple command line arguments:
+To run the pipeline, simply activate the *identifier* environment and run the *identifier.py* script. It requires multiple command line arguments:
 
 * input: Path for an input fasta file (query sequences).
 * database: Path for a fasta database file (reference sequences).
