@@ -25,7 +25,7 @@ Example usage:
 
     python scripts/identifier.py --input data/example.fasta --database resources/references.fasta --config-file /config/config.yml --output /Users/user/Desktop/output --threads 2 --threads-total 4
 
-This leads to the execution of the complete workflow, which comprehends the creation of blastn database, similarity search, parsing of blast output files, alignments and phylogenetic analysis. 
+This leads to the execution of the complete workflow, which comprehends the creation of blastn databases, similarity searches, parsing of blast output files, alignments and phylogenetic analyses. 
 
 ## Comments
 
