@@ -4,7 +4,7 @@ This is a generic snakemake workflow for integrated similarity search and phylog
 
 ## Instalation
 
-To make the pipeline available, clone the github repo, and create a conda environment from the environment file available:
+To make the pipeline available, clone the github repo, and create a conda environment from the file available:
 
     git clone link
     cd link
