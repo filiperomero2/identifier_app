@@ -1,5 +1,5 @@
-input_data: "data/mito_panga.fasta"
-input_fasta_db: "resources/mitochondrion.1.1.genomic.renamed.fasta"
+input_data: "data/example.fasta"
+input_fasta_db: "resources/references.fasta"
 target: 30
 threads: 2
-output: "/Users/filipemoreira/Desktop/bp_app_output/"
+output: "/Users/User/Desktop/identifier_app_output/"
