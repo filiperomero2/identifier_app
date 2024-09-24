@@ -1,18 +1,19 @@
 # Identifier
 
-This is a generic snakemake workflow for integrated similarity search and phylogenetic inference. From a set of query sequences, it runs blastn against custom databases to get the closest reference sequences. Subsets of the closest hits for each query are then retrieved and aligned for phylogenetic reconstructions.
+This is a generic snakemake workflow for integrated similarity search and phylogenetic inference. From a set of query sequences, it runs blastn against custom databases to get closest reference sequences. Subsets of the closest hits for each query are then retrieved and aligned for a phylogenetic reconstructions.
 
 ## Instalation
 
-To make the pipeline available, clone the github repo, and create a conda environment from the file available:
+To make the pipeline available, clone the github repo, and create a conda environment from the environment file available:
 
-    git clone link
-    cd link
-    mamba create -f envs/blast_app_env.yml
+    git clone https://github.com/filiperomero2/identifier_app.git
+    cd identifier_app
+    # The following requires bioconda
+    mamba install snakemake=7.32.4 blast=2.14.1 mafft=7.520 iqtree=2.2.5 trimal=1.5.0 pandas=2.1.1
 
 ## Usage
 
-To run the pipeline, simply activate the *identifier* environment and run the *identifier.py* script. It requires multiple command line arguments:
+To run the pipeline, simply activate the environment and run the identifier.py script. It requires multiple command line arguments:
 
 * input: Path for an input fasta file (query sequences).
 * database: Path for a fasta database file (reference sequences).
@@ -25,7 +26,7 @@ Example usage:
 
     python scripts/identifier.py --input data/example.fasta --database resources/references.fasta --config-file /config/config.yml --output /Users/user/Desktop/output --threads 2 --threads-total 4
 
-This leads to the execution of the complete workflow, which comprehends the creation of blastn databases, similarity searches, parsing of blast output files, alignments and phylogenetic analyses. 
+This leads to the execution of the complete workflow, which comprehends the creation of blastn database, similarity search, parsing of blast output files, alignments and phylogenetic analysis. 
 
 ## Comments
 
