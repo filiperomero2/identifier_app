@@ -62,7 +62,7 @@ def validate_args(args):
         print(f"Database file not identified -> {args['database']}")
         exit()
     
-    if(os.path.isfile("config/" + args['config_file'])):
+    if(os.path.isfile(args['config_file'])):
         print("Config file already exists. Please specify a new one.")
         exit()
 
