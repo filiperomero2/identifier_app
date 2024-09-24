@@ -29,14 +29,20 @@ rule run_blast:
     output:
         config['output'] + "results/blast_results/blast_results_" + config['input_data'].split("/")[-1] + ".tsv"
     threads: config['threads']
+    params:
+        path = config['output'] + "results/blast_results/"
     shell:
-        "blastn -db {input.db} -query {input.query} -num_threads {threads} "
-        "-outfmt \"6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore\" "
-        "> {output}"
+        """
+        blastn -db {input.db} -query {input.query} -num_threads {threads} -outfmt \"6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore\" > {params.path}temp.txt;
+        echo \"qseqid\tsseqid\tpident\tlength\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore\" > {params.path}temp_2.txt;
+        cat {params.path}temp_2.txt {params.path}temp.txt > {output};
+        rm {params.path}temp.txt; rm {params.path}temp_2.txt        
+        """
 
 rule parse_blast_results:
     input:
         blast_results = config['output'] + "results/blast_results/blast_results_" + config['input_data'].split("/")[-1] + ".tsv",
+        query = config['input_data'],
         db = config['input_fasta_db']
     output:
         config['output'] + "results/top_hits/report.txt"
@@ -45,6 +51,7 @@ rule parse_blast_results:
     shell:
         "python scripts/parse_blast_results.py "
         "--input {input.blast_results} "
+        "--query {input.query} "
         "--db {input.db} "
         "--target {params.target} "
         "--output {output}"
