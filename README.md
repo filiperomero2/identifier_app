@@ -17,6 +17,7 @@ To run the pipeline, simply activate the environment and run the identifier.py s
 
 * input: Path for an input fasta file (query sequences).
 * database: Path for a fasta database file (reference sequences).
+* putative: Path for a fasta file file with the putative closest sequences.
 * config-file: Name of the output config file.
 * output: Path for the output directory.
 * threads: Number of threads for individual jobs.
