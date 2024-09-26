@@ -47,12 +47,14 @@ rule parse_blast_results:
     output:
         config['output'] + "results/top_hits/report.txt"
     params:
-        target = str(config['target'])
+        target = str(config['target']),
+        putative = config['putative']
     shell:
         "python scripts/parse_blast_results.py "
         "--input {input.blast_results} "
         "--query {input.query} "
         "--db {input.db} "
+        "--putative {params.putative} "
         "--target {params.target} "
         "--output {output}"
 
@@ -61,7 +63,7 @@ rule align:
         fasta = config['output'] + "results/top_hits/{query}",
         report = config['output'] + "results/top_hits/report.txt"
     output:
-        config['output'] + "results/top_hits/aln.{query}"
+        temp(config['output'] + "results/top_hits/aln.{query}")
     threads: config['threads']
     shell:
         "mafft --quiet --thread {threads} {input.fasta} > {output}"
