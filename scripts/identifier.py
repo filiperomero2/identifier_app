@@ -3,7 +3,7 @@
 """
 This scripts dynamically creates config files and
 run the blast/phylo species identifier. 
-Filipe Moreira - 2023/10/03
+Filipe Moreira - 2024/09/26
 """
 
 import os
@@ -14,7 +14,7 @@ from snakemake import snakemake
 def get_args():
     
     parser = argparse.ArgumentParser(
-    description='A script to generate config files and run the indetifier workflow',
+    description='A script to generate config files and run the identifier workflow',
     usage='''identifier.py [args]''')
 
     parser.add_argument('--input',
@@ -24,6 +24,9 @@ def get_args():
     parser.add_argument('--database',
     help='Complete path for the database fasta file',
     required = True)
+
+    parser.add_argument('--putative',
+    help='Complete path for the putative id fasta file.')
 
     parser.add_argument('--config-file', type = str, 
     help='Name for the config file (default: config.yml).',
@@ -61,6 +64,15 @@ def validate_args(args):
     else:
         print(f"Database file not identified -> {args['database']}")
         exit()
+
+    if args['putative']:
+        print("A putative sequences file was provided...")
+        if os.path.isfile(args['putative']):
+            print(f"File identified -> {args['putative']}")
+        else:
+            print(f"File not found, please verify. -> {args['putative']}")
+    else:
+        print("A putative sequences file was not provided.")
     
     if(os.path.isfile(args['config_file'])):
         print("Config file already exists. Please specify a new one.")
@@ -76,13 +88,19 @@ def validate_args(args):
 
 def generate_config_file(args):
 
-    with open("config/"+ args['config_file'], 'w') as f:
+    with open(args['config_file'], 'w') as f:
     
         input = "input_data: " + args['input'] + "\n"
         f.write(input)
 
         database = "input_fasta_db: " + args['database'] + "\n"
         f.write(database)
+
+        if args['putative']:
+            putative = "putative: " + args['putative'] + "\n"
+        else:
+            putative = "putative: NA\n"
+        f.write(putative)
 
         target = "target: " + str(args['target']) + "\n"
         f.write(target)
@@ -93,11 +111,9 @@ def generate_config_file(args):
         output = "output: " + args['output'] + "/\n"
         f.write(output)
 
-        print("The config file was generated. -> config/", args['config_file'])
+        print("The config file was generated. -> ", args['config_file'])
         
     return
-
-     
 
 def main():
     args = get_args()
@@ -105,7 +121,7 @@ def main():
     generate_config_file(args)
 
     target_rule = "all"
-    config = "config/" + args['config_file']
+    config = args['config_file']
     cores = args['threads_total']
 
     print(config)
