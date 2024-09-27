@@ -123,11 +123,12 @@ def main():
     target_rule = "all"
     config = args['config_file']
     cores = args['threads_total']
+    workflow_path = sys.path[0] + '/identifier.smk'
 
     print(config)
 
-    status_1 = snakemake('Snakefile', configfiles=[config], cores=cores,targets=[target_rule])
-    status_2 = snakemake('Snakefile', configfiles=[config], cores=cores,targets=[target_rule])
+    status_1 = snakemake(workflow_path, configfiles=[config], cores=cores,targets=[target_rule])
+    status_2 = snakemake(workflow_path, configfiles=[config], cores=cores,targets=[target_rule])
 
     if status_1 == 0 and status_2 == 0:
         return 0
