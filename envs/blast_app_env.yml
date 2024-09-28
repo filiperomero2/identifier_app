@@ -9,3 +9,9 @@ dependencies:
   - iqtree=2.2.5
   - trimal=1.5.0
   - pandas=2.1.1
+  - r-base=4.4.1
+  - r-ape=5.8
+  - r-phytools=0.6_60
+  - r-stringr=1.5.0
+  - bioconductor-ggtree=3.6.2
+

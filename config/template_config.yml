@@ -1,5 +1,6 @@
 input_data: "data/example.fasta"
 input_fasta_db: "resources/references.fasta"
+putative: NA
 target: 30
 threads: 2
 output: "/Users/User/Desktop/identifier_app_output/"

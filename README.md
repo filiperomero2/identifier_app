@@ -1,6 +1,6 @@
 # Identifier
 
-This is a generic snakemake workflow for integrated similarity search and phylogenetic inference. From a set of query sequences, it runs blastn against custom databases to get closest reference sequences. Subsets of the closest hits for each query are then retrieved and aligned for a phylogenetic reconstructions.
+This is a generic snakemake workflow for integrated similarity search and phylogenetic inference. From a set of query sequences, it runs blastn against custom databases to get closest reference sequences. Subsets of the closest hits for each query are then retrieved and aligned for maximum-likelihood phylogenetic reconstructions.
 
 ## Instalation
 
@@ -8,8 +8,10 @@ To make the pipeline available, clone the github repo, and create a conda enviro
 
     git clone https://github.com/filiperomero2/identifier_app.git
     cd identifier_app
-    # The following requires bioconda
-    mamba install snakemake=7.32.4 blast=2.14.1 mafft=7.520 iqtree=2.2.5 trimal=1.5.0 pandas=2.1.1
+    mamba create -n identifier
+    mamba activate identifier
+    # The following requires setting the bioconda channel
+    mamba env update -n identifier envs/blast_app_env.yml
 
 ## Usage
 
@@ -27,13 +29,12 @@ Example usage:
 
     python scripts/identifier.py --input data/example.fasta --database resources/references.fasta --config-file /config/config.yml --output /Users/user/Desktop/output --threads 2 --threads-total 4
 
-This leads to the execution of the complete workflow, which comprehends the creation of blastn database, similarity search, parsing of blast output files, alignments and phylogenetic analysis. 
+This leads to the execution of the complete workflow, which comprehends the creation of blastn database, similarity searches, parsing of blast output files, alignments and phylogenetic analysis. The latest version also generates a filtered blast table, including only the closest phylogenetic matches, and a figure for each tree.
 
 ## Comments
 
 Future developments include:
-  * Support for additional CLI options (examples: e-value/identity filters).
-  * A script for automatic closest phylogenetic match identification.
+  * Support for additional CLI options;
   * An interface for generating figures / html reports.
 
 ## Citations

@@ -9,8 +9,19 @@ def get_input_fasta_files(path):
 
 rule all:
     input:
-        config['output'] + "results/top_hits/report.txt",
-        expand(config['output'] + "results/top_hits/aln.trim.{query}.treefile",query = get_input_fasta_files(config['output'] + 'results/top_hits/'))
+        config['output'] + "results/blast_results/blast_results_closest_phylo_references.tsv"
+    output:
+        config['output'] + 'results/summary/summary.txt'
+    params:
+        path_summary = config['output'] + 'results/summary/',
+        trees_path = config['output'] + 'results/top_hits/'
+    shell:
+        """
+        touch {output};
+        echo \"All samples were analyzed. Please check the trees and the blast table.\" >> {output};
+        cp {input} {params.path_summary};
+        cp -r {params.trees_path}*png {params.path_summary};
+        """
         
 rule create_blast_db:
     input:
@@ -84,3 +95,15 @@ rule infer_tree:
     threads: config['threads']
     shell:
         "iqtree -s {input} -T {threads} -m HKY+G4 -alrt 1000 --quiet"
+
+rule get_closest_hits_and_plot_trees:
+    input:
+        report = config['output'] + "results/top_hits/report.txt",
+        trees = expand(config['output'] + "results/top_hits/aln.trim.{query}.treefile",query = get_input_fasta_files(config['output'] + 'results/top_hits/'))
+    output:
+        config['output'] + "results/blast_results/blast_results_closest_phylo_references.tsv"
+    params:
+        blast_results = config['output'] + "results/blast_results/blast_results_" + config['input_data'].split("/")[-1] + ".tsv",
+        trees_path = config['output'] + 'results/top_hits/'
+    shell:
+        "Rscript --vanilla scripts/parse_trees.R {params.blast_results} {params.trees_path}"
