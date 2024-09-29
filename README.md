@@ -22,6 +22,8 @@ To run the pipeline, simply activate the environment and run the identifier.py s
 * putative: Path for a fasta file file with the putative closest sequences.
 * config-file: Name of the output config file.
 * output: Path for the output directory.
+* model: Nucleotide substitution model, as available in IQ-Tree v2.
+* support: Statistical support method for phylogenies (alrt or non-parametric bootstrap).
 * threads: Number of threads for individual jobs.
 * threads_total: Total number of threads available for processing.
 

@@ -93,8 +93,11 @@ rule infer_tree:
     output:
         config['output'] + "results/top_hits/aln.trim.{query}.treefile"
     threads: config['threads']
+    params:
+        model = config['model'],
+        support = config['support']
     shell:
-        "iqtree -s {input} -T {threads} -m HKY+G4 -alrt 1000 --quiet"
+        "iqtree -s {input} -T {threads} -m {params.model} -{params.support} --quiet"
 
 rule get_closest_hits_and_plot_trees:
     input:

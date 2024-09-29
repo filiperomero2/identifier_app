@@ -36,9 +36,18 @@ def get_args():
     help='Complete path for output directory.',
     required = True)
 
+    parser.add_argument('--model', type = str, 
+    help='Nucleotide substitution model, as available in IQ-Tree v2 (default: TEST).',
+    nargs='?',const=1, default='TEST')
+
+    parser.add_argument('--support', type = str,
+    help='Statistical support method (default: alrt).',
+    choices = ['alrt','bootstrap'],
+    nargs='?', default = 'alrt')
+
     parser.add_argument('--target',type = int,
     help="Number of sequences to be included in the phylogenetic analysis (Default = 30).",
-    nargs='?',const=1, default=30)
+    nargs='?',const=1, default=20)
 
     parser.add_argument('--threads',type = int,
     help='Number of available threads for individual jobs(Default = 1)',
@@ -110,6 +119,15 @@ def generate_config_file(args):
 
         output = "output: " + args['output'] + "/\n"
         f.write(output)
+
+        model = "model: " + args['model'] + "\n"
+        f.write(model)
+
+        if args['support'] == 'alrt':
+            support = "support: alrt 1000\n"
+        else:
+            support = "support: -b 100\n"
+        f.write(support)
 
         print("The config file was generated. -> ", args['config_file'])
         
