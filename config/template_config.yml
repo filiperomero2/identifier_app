@@ -4,3 +4,5 @@ putative: NA
 target: 30
 threads: 2
 output: "/Users/User/Desktop/identifier_app_output/"
+model: TEST
+support: alrt 1000

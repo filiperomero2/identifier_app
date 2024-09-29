@@ -42,6 +42,7 @@ Future developments include:
 ## Citations
 
 If you used this pipeline, cite this GitHub repository, as well the core dependencies:
+* <a href="https://www.sciencedirect.com/science/article/abs/pii/S0022283605803602?via%3Dihub">BLAST</a>
 * <a href="https://academic.oup.com/mbe/article/30/4/772/1073398">MAFFT</a>
 * <a href="https://academic.oup.com/mbe/article/37/5/1530/5721363">IQ-Tree</a>
 
